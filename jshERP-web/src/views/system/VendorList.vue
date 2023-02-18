@@ -142,6 +142,7 @@
           { title: '电子邮箱', dataIndex: 'email',width:150,align:"left"},
           { title: '期初应付',dataIndex: 'beginNeedPay',width:80,align:"left"},
           { title: '期末应付',dataIndex: 'allNeedPay',width:80,align:"left"},
+          { title: '折扣(%)', dataIndex: 'discount',width:80,align:"left"},
           { title: '税率(%)', dataIndex: 'taxRate',width:80,align:"left"},
           { title: '排序', dataIndex: 'sort', width: 60,align:"left"},
           { title: '状态',dataIndex: 'enabled',width:60,align:"center",

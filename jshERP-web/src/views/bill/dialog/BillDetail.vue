@@ -1112,6 +1112,7 @@
           { title: '已入库', dataIndex: 'finishNumber'},
           { title: '单价', dataIndex: 'unitPrice'},
           { title: '金额', dataIndex: 'allPrice'},
+          { title: '折扣(%)', dataIndex: 'discount'},
           { title: '税率(%)', dataIndex: 'taxRate'},
           { title: '税额', dataIndex: 'taxMoney'},
           { title: '价税合计', dataIndex: 'taxLastMoney'},
@@ -1134,6 +1135,7 @@
           { title: '数量', dataIndex: 'operNumber'},
           { title: '单价', dataIndex: 'unitPrice'},
           { title: '金额', dataIndex: 'allPrice'},
+          { title: '折扣(%)', dataIndex: 'discount'},
           { title: '税率(%)', dataIndex: 'taxRate'},
           { title: '税额', dataIndex: 'taxMoney'},
           { title: '价税合计', dataIndex: 'taxLastMoney'},
@@ -1157,6 +1159,7 @@
           { title: '数量', dataIndex: 'operNumber'},
           { title: '单价', dataIndex: 'unitPrice'},
           { title: '金额', dataIndex: 'allPrice'},
+          { title: '折扣(%)', dataIndex: 'discount'},
           { title: '税率(%)', dataIndex: 'taxRate'},
           { title: '税额', dataIndex: 'taxMoney'},
           { title: '价税合计', dataIndex: 'taxLastMoney'},
@@ -1177,6 +1180,7 @@
           { title: '已出库', dataIndex: 'finishNumber'},
           { title: '单价', dataIndex: 'unitPrice'},
           { title: '金额', dataIndex: 'allPrice'},
+          { title: '折扣(%)', dataIndex: 'discount'},
           { title: '税率(%)', dataIndex: 'taxRate'},
           { title: '税额', dataIndex: 'taxMoney'},
           { title: '价税合计', dataIndex: 'taxLastMoney'},
@@ -1199,6 +1203,7 @@
           { title: '数量', dataIndex: 'operNumber'},
           { title: '单价', dataIndex: 'unitPrice'},
           { title: '金额', dataIndex: 'allPrice'},
+          { title: '折扣(%)', dataIndex: 'discount'},
           { title: '税率(%)', dataIndex: 'taxRate'},
           { title: '税额', dataIndex: 'taxMoney'},
           { title: '价税合计', dataIndex: 'taxLastMoney'},
@@ -1222,6 +1227,7 @@
           { title: '数量', dataIndex: 'operNumber'},
           { title: '单价', dataIndex: 'unitPrice'},
           { title: '金额', dataIndex: 'allPrice'},
+          { title: '折扣(%)', dataIndex: 'discount'},
           { title: '税率(%)', dataIndex: 'taxRate'},
           { title: '税额', dataIndex: 'taxMoney'},
           { title: '价税合计', dataIndex: 'taxLastMoney'},
@@ -1607,7 +1613,7 @@
           organType = '客户：'
         }
         aoa = [[organType, this.model.organName, '', '单据日期：', this.model.operTimeStr, '', '单据编号：', this.model.number],[]]
-        let title = ['条码', '名称', '规格', '型号', '颜色', '扩展信息', '库存', '单位', '多属性', '数量', finishType, '单价', '金额', '税率(%)', '税额', '价税合计', '备注']
+        let title = ['条码', '名称', '规格', '型号', '颜色', '扩展信息', '库存', '单位', '多属性', '数量', finishType, '单价', '金额', '折扣(%)', '税率(%)', '税额', '价税合计', '备注']
         aoa.push(title)
         for (let i = 0; i < this.dataSource.length; i++) {
           let ds = this.dataSource[i]
@@ -1627,7 +1633,7 @@
           organType = '客户：'
         }
         aoa = [[organType, this.model.organName, '', '单据日期：', this.model.operTimeStr, '', '单据编号：', this.model.number, '', '关联单号：', this.model.linkNumber],[]]
-        let title = ['仓库名称', '条码', '名称', '规格', '型号', '颜色', '扩展信息', '库存', '单位', '序列号', '批号', '有效期', '多属性', '数量', '单价', '金额', '税率(%)', '税额', '价税合计', '重量', '备注']
+        let title = ['仓库名称', '条码', '名称', '规格', '型号', '颜色', '扩展信息', '库存', '单位', '序列号', '批号', '有效期', '多属性', '数量', '单价', '金额', '折扣(%)', '税率(%)', '税额', '价税合计', '重量', '备注']
         aoa.push(title)
         for (let i = 0; i < this.dataSource.length; i++) {
           let ds = this.dataSource[i]

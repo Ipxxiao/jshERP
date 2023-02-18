@@ -236,6 +236,7 @@
             },
             { title: '单价', key: 'unitPrice', width: '5%', type: FormTypes.inputNumber},
             { title: '金额', key: 'allPrice', width: '5%', type: FormTypes.inputNumber, statistics: true },
+            { title: '折扣', key: 'discount', width: '4%', type: FormTypes.inputNumber,placeholder: '%'},
             { title: '税率', key: 'taxRate', width: '4%', type: FormTypes.inputNumber,placeholder: '%'},
             { title: '税额', key: 'taxMoney', width: '5%', type: FormTypes.inputNumber, readonly: true, statistics: true },
             { title: '价税合计', key: 'taxLastMoney', width: '7%', type: FormTypes.inputNumber, statistics: true },

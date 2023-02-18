@@ -345,7 +345,7 @@ export const BillModalMixin = {
     onValueChange(event) {
       let that = this
       const { type, row, column, value, target } = event
-      let param,snList,batchNumber,operNumber,unitPrice,allPrice,taxRate,taxMoney,taxLastMoney
+      let param,snList,batchNumber,operNumber,unitPrice,allPrice,discount,discountPrice,taxRate,taxMoney,taxLastMoney
       switch(column.key) {
         case "depotId":
           if(row.barCode){
@@ -428,8 +428,10 @@ export const BillModalMixin = {
             taxRate = row.taxRate-0 //税率
             unitPrice = row.unitPrice-0 //单价
             allPrice = (unitPrice*operNumber).toFixed(2)-0
-            taxMoney =((taxRate*0.01)*allPrice).toFixed(2)-0
-            taxLastMoney = (allPrice + taxMoney).toFixed(2)-0
+            discount = (row.discount-0) * 0.01 //折扣
+            discountPrice = allPrice * discount //折扣价
+            taxMoney =((taxRate*0.01)*discountPrice).toFixed(2)-0
+            taxLastMoney = (discountPrice + taxMoney).toFixed(2)-0
             target.setValues([{rowKey: row.id, values: {operNumber: operNumber, allPrice: allPrice, taxMoney: taxMoney, taxLastMoney: taxLastMoney}}])
             target.recalcAllStatisticsColumns()
             that.autoChangePrice(target)
@@ -450,8 +452,10 @@ export const BillModalMixin = {
                 taxRate = row.taxRate-0 //税率
                 unitPrice = row.unitPrice-0 //单价
                 allPrice = (unitPrice*operNumber).toFixed(2)-0
-                taxMoney =((taxRate*0.01)*allPrice).toFixed(2)-0
-                taxLastMoney = (allPrice + taxMoney).toFixed(2)-0
+                discount = (row.discount-0) * 0.01 //折扣
+                discountPrice = allPrice * discount //折扣价
+                taxMoney =((taxRate*0.01)*discountPrice).toFixed(2)-0
+                taxLastMoney = (discountPrice + taxMoney).toFixed(2)-0
                 target.setValues([{rowKey: row.id, values: {expirationDate: info.expirationDateStr, operNumber: operNumber,
                     allPrice: allPrice, taxMoney: taxMoney, taxLastMoney: taxLastMoney}}])
                 target.recalcAllStatisticsColumns()
@@ -465,8 +469,10 @@ export const BillModalMixin = {
           taxRate = row.taxRate-0 //税率
           unitPrice = row.unitPrice-0 //单价
           allPrice = (unitPrice*operNumber).toFixed(2)-0
-          taxMoney =((taxRate*0.01)*allPrice).toFixed(2)-0
-          taxLastMoney = (allPrice + taxMoney).toFixed(2)-0
+          discount = (row.discount-0) * 0.01 //折扣
+          discountPrice = allPrice * discount //折扣价
+          taxMoney =((taxRate*0.01)*discountPrice).toFixed(2)-0
+          taxLastMoney = (discountPrice + taxMoney).toFixed(2)-0
           target.setValues([{rowKey: row.id, values: {allPrice: allPrice, taxMoney: taxMoney, taxLastMoney: taxLastMoney}}])
           target.recalcAllStatisticsColumns()
           that.autoChangePrice(target)
@@ -476,8 +482,10 @@ export const BillModalMixin = {
           unitPrice = value-0 //单价
           taxRate = row.taxRate-0 //税率
           allPrice = (unitPrice*operNumber).toFixed(2)-0
-          taxMoney =((taxRate*0.01)*allPrice).toFixed(2)-0
-          taxLastMoney = (allPrice + taxMoney).toFixed(2)-0
+          discount = (row.discount-0) * 0.01 //折扣
+          discountPrice = allPrice * discount //折扣价
+          taxMoney =((taxRate*0.01)*discountPrice).toFixed(2)-0
+          taxLastMoney = (discountPrice + taxMoney).toFixed(2)-0
           target.setValues([{rowKey: row.id, values: {allPrice: allPrice, taxMoney: taxMoney, taxLastMoney: taxLastMoney}}])
           target.recalcAllStatisticsColumns()
           that.autoChangePrice(target)
@@ -487,9 +495,22 @@ export const BillModalMixin = {
           taxRate = row.taxRate-0 //税率
           allPrice = value-0
           unitPrice = (allPrice/operNumber).toFixed(2)-0 //单价
-          taxMoney =((taxRate*0.01)*allPrice).toFixed(2)-0
-          taxLastMoney = (allPrice + taxMoney).toFixed(2)-0
+          discount = (row.discount-0) * 0.01 //折扣
+          discountPrice = allPrice * discount //折扣价
+          taxMoney =((taxRate*0.01)*discountPrice).toFixed(2)-0
+          taxLastMoney = (discountPrice + taxMoney).toFixed(2)-0
           target.setValues([{rowKey: row.id, values: {unitPrice: unitPrice, taxMoney: taxMoney, taxLastMoney: taxLastMoney}}])
+          target.recalcAllStatisticsColumns()
+          that.autoChangePrice(target)
+          break;
+        case "discount":
+          taxRate = row.taxRate-0 //税率
+          allPrice = row.allPrice-0
+          discount = (value-0) * 0.01 //折扣
+          discountPrice = allPrice * discount //折扣价
+          taxMoney =((taxRate*0.01)*discountPrice).toFixed(2)-0
+          taxLastMoney = (discountPrice + taxMoney).toFixed(2)-0
+          target.setValues([{rowKey: row.id, values: {taxLastMoney: taxLastMoney}}])
           target.recalcAllStatisticsColumns()
           that.autoChangePrice(target)
           break;
@@ -497,9 +518,11 @@ export const BillModalMixin = {
           operNumber = row.operNumber-0 //数量
           allPrice = row.allPrice-0
           unitPrice = row.unitPrice-0
+          discount = (row.discount-0) * 0.01 //折扣
+          discountPrice = allPrice * discount //折扣价
           taxRate = value-0 //税率
-          taxMoney =((taxRate*0.01)*allPrice).toFixed(2)-0
-          taxLastMoney = (allPrice + taxMoney).toFixed(2)-0
+          taxMoney =((taxRate*0.01)*discountPrice).toFixed(2)-0
+          taxLastMoney = (discountPrice + taxMoney).toFixed(2)-0
           target.setValues([{rowKey: row.id, values: {taxMoney: taxMoney, taxLastMoney: taxLastMoney}}])
           target.recalcAllStatisticsColumns()
           that.autoChangePrice(target)
@@ -510,7 +533,9 @@ export const BillModalMixin = {
           taxRate = row.taxRate-0 //税率
           unitPrice = (taxLastMoney/operNumber/(1+taxRate*0.01)).toFixed(2)-0
           allPrice = (unitPrice*operNumber).toFixed(2)-0
-          taxMoney =(taxLastMoney-allPrice).toFixed(2)-0
+          discount = (row.discount-0) * 0.01 //折扣
+          discountPrice = allPrice * discount //折扣价
+          taxMoney =(taxLastMoney-discountPrice).toFixed(2)-0
           target.setValues([{rowKey: row.id, values: {unitPrice: unitPrice, allPrice: allPrice, taxMoney: taxMoney}}])
           target.recalcAllStatisticsColumns()
           that.autoChangePrice(target)
@@ -531,6 +556,7 @@ export const BillModalMixin = {
         operNumber: 1,
         unitPrice: mInfo.billPrice,
         allPrice: mInfo.billPrice,
+        discount: 100,
         taxRate: 0,
         taxMoney: 0,
         taxLastMoney: mInfo.billPrice
@@ -705,11 +731,13 @@ export const BillModalMixin = {
                   if(detail.barCode === this.scanBarCode) {
                     detail.operNumber = (detail.operNumber-0)+1
                     //由于改变了商品数量，需要同时更新相关金额和价税合计
+                    let discount = (detail.discount-0) * 0.01 //折扣
+                    let discountPrice = allPrice * discount //折扣价
                     let taxRate = detail.taxRate-0 //税率
                     let unitPrice = detail.unitPrice-0 //单价
                     detail.allPrice = (unitPrice*detail.operNumber).toFixed(2)-0
-                    detail.taxMoney = ((taxRate*0.01)*detail.allPrice).toFixed(2)-0
-                    detail.taxLastMoney = (detail.allPrice + detail.taxMoney).toFixed(2)-0
+                    detail.taxMoney = ((taxRate*0.01)*discountPrice).toFixed(2)-0
+                    detail.taxLastMoney = (discountPrice + detail.taxMoney).toFixed(2)-0
                     hasFinished = true
                   }
                   newDetailArr.push(detail)
@@ -735,6 +763,7 @@ export const BillModalMixin = {
                   item.operNumber = 1
                   item.unitPrice = mInfo.billPrice
                   item.allPrice = mInfo.billPrice
+                  item.discount = 100
                   item.taxRate = 0
                   item.taxMoney = 0
                   item.taxLastMoney = mInfo.billPrice

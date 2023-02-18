@@ -183,6 +183,7 @@
           {title: '数量', dataIndex: 'operNumber', sorter: (a, b) => a.operNumber - b.operNumber},
           {title: '单价', dataIndex: 'unitPrice', sorter: (a, b) => a.unitPrice - b.unitPrice},
           {title: '金额', dataIndex: 'allPrice', sorter: (a, b) => a.allPrice - b.allPrice},
+          {title: '折扣(%)', dataIndex: 'discount'},
           {title: '税率(%)', dataIndex: 'taxRate'},
           {title: '税额', dataIndex: 'taxMoney', sorter: (a, b) => a.taxMoney - b.taxMoney},
           {title: '往来单位', dataIndex: 'sname'},
@@ -250,7 +251,7 @@
         }
       },
       exportExcel() {
-        let aoa = [['单据编号', '条码', '名称', '规格', '型号', '单位', '数量', '单价', '金额', '税率(%)', '税额', '往来单位', '仓库', '入库日期', '备注']]
+        let aoa = [['单据编号', '条码', '名称', '规格', '型号', '单位', '数量', '单价', '金额', '折扣(%)', '税率(%)', '税额', '往来单位', '仓库', '入库日期', '备注']]
         for (let i = 0; i < this.dataSource.length; i++) {
           let ds = this.dataSource[i]
           let item = [ds.number, ds.barCode, ds.mname, ds.standard, ds.model, ds.mUnit, ds.operNumber, ds.unitPrice,

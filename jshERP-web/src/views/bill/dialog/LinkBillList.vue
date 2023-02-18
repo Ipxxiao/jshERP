@@ -184,6 +184,7 @@
           { title: '数量', dataIndex: 'operNumber',width:80},
           { title: '单价', dataIndex: 'unitPrice',width:80},
           { title: '金额', dataIndex: 'allPrice',width:80},
+          { title: '折扣(%)', dataIndex: 'discount', width:80},
           { title: '税率(%)', dataIndex: 'taxRate', width:80},
           { title: '税额', dataIndex: 'taxMoney', width:80},
           { title: '价税合计', dataIndex: 'taxLastMoney', width:80},
